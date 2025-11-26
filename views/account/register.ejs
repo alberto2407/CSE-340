@@ -1,0 +1,31 @@
+<h1><%= title %></h1>
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li class="messages"><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<form action="/account/register" method="post" class="account-form">
+    <div class="user-info">User Registration</div>
+    <label for="account_firstname">First Name: <input type="text" id="account_firstname" name="account_firstname" title="Enter your first name" required value="<%= locals.account_firstname %>"></label>
+    <label for="account_lastname">Last Name: <input type="text" id="account_lastname" name="account_lastname" title="Enter your last name" required value="<%= locals.account_lastname %>"></label>
+    <label for="account_email">Email: <input type="email" id="account_email" name="account_email" title="Enter a valid email address" required value="<%= locals.account_email %>"></label>
+    <label for="account_password">Password:</label>
+    <div class="password-container">
+        <input type="password" id="account_password" name="account_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" title="Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character" required>
+        <span data-toggle="#account_password" class="toggle-password">👁️</span>
+    </div>
+    <label for="account_confirmPassword">Confirm your password:</label>
+    <div class="password-container">
+        <input type="password" id="account_confirmPassword" name="account_confirmPassword" title="Please re-enter your password" required>
+        <span data-toggle="#account_confirmPassword" class="toggle-password">👁️</span>
+    </div>
+    <p id="noMatchPassword" class="noMatchPassword" style="display: none;">❌ Passwords do not match. Please try again</p>
+    <p id="matchPassword" class="matchPassword" style="display: none;">✅ Passwords match</p>
+    <span class="password-requirements">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+    <button type="submit" id="submitBtn">Register</button>
+    <p class="haveAccount">Already have an account? <a href="/account/login">Sign in</a></p>
+</form>
